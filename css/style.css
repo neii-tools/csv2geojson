@@ -10,3 +10,13 @@ body {
         height: 600px;
 
     }
+    
+
+.fileinput-button input {
+       position: absolute;
+       opacity: 0;
+       -ms-filter: 'alpha(opacity=0)';
+       direction: ltr;
+       cursor: pointer;
+       margin-top: -25px 0 0 0;
+    }

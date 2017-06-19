@@ -76,6 +76,40 @@
       <div class="panel-body">Populate the template with data about your monitoring sites. For more information about the NEMSR schema and vocabularies used in the template please see the <a href="http://www.neii.gov.au/nemsr/data-providers">NEMSR data provider area</a> of the NEII website.</div>
     </div><!-- /.panel 2-->
 	
+    
+	<div class="panel panel-primary">
+      <div class="panel-heading">Step 3 TEST - Load your data</div>
+      <div class="panel-body">When you are ready upload your CSV formatted data.
+	<!--  <div class="text-center"><button type="button" class="btn btn-lg btn-warning" id="uploadcsv">Upload <span class="glyphicon glyphicon-cloud-upload"></span></button>
+	-->
+	
+	<input id="fileSelector" type="file" style="visibility:hidden" accept=".csv"/>
+	<div class="text-center"><button type="button" class="btn btn-lg btn-warning"  onclick="$('#fileSelector').click();" id="uploadcsv">UploadNEW <span class="glyphicon glyphicon-cloud-upload"></span></button>
+	
+	
+	
+	
+	</div>
+	<div class="row">
+        <div class="col-md-12">
+            <textarea id="csvload" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >
+id,name,description,siteURL,siteLicence,srsName,point.longitude,point.latitude,point.ahd,operatingAuthority,operationAuthorityURL,siteStatus,ex1,ex2,ex3,ex4,ex5,observedProperty,procedure,observationMethod,dataAvailabilityStatus,samplingRegime,firstObservationDate,finalObservationDate,observedProperty,procedure,observationMethod,dataAvailabilityStatus,samplingRegime,firstObservationDate,finalObservationDate
+DAV ,Davies_Reef,"Sensor network infrastructure was installed at Davies Reef in the central Great Barrier Reef off Townsville, Australia. The infrastructure consists of a base station mounted on the existing reef communications tower and a number of buoys which carry the actual sensors.",http://data.aims.gov.au/metadataviewer/uuid/5862162e-1640-4d06-ba77-2b413fec64a2,open-Other,epsg:4326,147.634,-18.831,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,1/12/2009,,,,,,,,
+HI,Heron_Island,"Sensor network infrastructure was installed at Heron Island in the southern Great Barrier Reef off Gladstone, Australia. The infrastructure consists of a base station mounted on the existing communications tower, a number of network relay poles installed in the lagoon and a number of buoys which carry the actual sensors.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=aefce70d-0ca2-494a-a8f9-47499e2c7f6e,open-Other,epsg:4326,151.912,-23.4408,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,13/08/2007,,,,,,,,
+LIZ ,Lizard_Island,"Sensor network infrastructure was installed at Lizard Island in the northern Great Barrier Reef off Cooktown, Australia. The infrastructure consists of a base station mounted on the workshop of the Lizard Island Research Station (LIRS), two sensor poles that create the on-reef network and four sensor floats on which the sensors are attached.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=efc69c33-528f-4853-99aa-74d73e0daffa,open-Other,epsg:4326,145.4471,-14.6784,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,30/08/2010,,,,,,,,
+MYR ,Myrmidon_Reef,"Sensor network infrastructure was installed at Myrmidon Reef in the central Great Barrier Reef off Townsville, Australia. The infrastructure consists of a base station mounted on the existing reef communications tower and a single buoy which carries the actual sensors.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=a1677f88-d1a9-469f-ba68-fd52f42b0739,open-Other,epsg:4326,147.3803,-18.27214,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,3/05/2011,,,,,,,,
+OTI,One_Tree_Island,"Sensor network infrastructure was installed at One Tree Island in the southern Great Barrier Reef off Gladstone, Australia. The infrastructure consists of a base station mounted on the existing water tower and three sensor poles located in each of the major lagoon systems around the island. Each pole has a thermistor mounted at the base and then a thermistor string with five additional sensors that are located down the wall of the coral structure into the lagoon.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=ee22a601-97cf-4b91-ac85-36c0198f912c,open-Other,epsg:4326,152.0915,-23.507,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,13/08/2007,,,,,,,,
+OI,Orpheus_Island,"Sensor network infrastructure was installed at Orpheus Island in the central Great Barrier Reef just north of Townsville, Australia. The infrastructure consists of a base station located on an existing mast at the Orpheus Island Research Station run by James Cook University, two sensor-floats or buoys - one located in Pioneer Bay off the Research Station and one in Little Pioneer Bay and three Relay / Sensor Poles - two located on the reef flat on the north-west point of Orpheus Island and one located on the southern point of near-by Pelorus Island.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=13846fdf-515a-46e3-836a-3a09906de215,open-Other,epsg:4326,146.4893,-18.6137,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,1/09/2009,,,,,,,,
+RIB ,Rib_Reef,"Sensor network infrastructure was installed at Rib Reef in the central Great Barrier Reef off Townsville, Australia. The infrastructure consists of a single 1300 mm buoy located off the north (front) of the reef.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=f81fc09e-a5b9-48c1-8315-975fb6209c7b,open-Other,epsg:4326,146.872014,-18.469325,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,22/12/2011,,,,,,,,</textarea>
+        </div>
+    	</div>
+	  
+	  </div>
+	  
+    </div><!-- /.panel 3 TEST-->
+	
+	
+	
 	<div class="panel panel-primary">
       <div class="panel-heading">Step 3 - Load your data</div>
       <div class="panel-body">When you are ready copy and paste your data from the template into the box below (delete the dummy data first!)
@@ -97,6 +131,9 @@ RIB ,Rib_Reef,"Sensor network infrastructure was installed at Rib Reef in the ce
 	  </div>
 	  
     </div><!-- /.panel 3-->
+    
+    
+    
 	<div class="panel panel-primary">
       <div class="panel-heading">Step 4: Add network details</div>
       <div class="panel-body">Add information about your monitoring network in the form below:	

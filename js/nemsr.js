@@ -30,17 +30,48 @@
   
   
   var csv = document.getElementById('csv');
-  var csveditor = CodeMirror.fromTextArea(csv, {
+ // var csveditorOLD = CodeMirror.fromTextArea(csv, {
+//	'lineNumbers': true, 
+//	'mode': ' text/plain'
+//  });
+  
+  var csveditor = CodeMirror.fromTextArea(csvload, {
 	'lineNumbers': true, 
 	'mode': ' text/plain'
   });
-  
   
   var json = document.getElementById('json');
   var jsoneditor = CodeMirror.fromTextArea(json, {
 	'lineNumbers': true, 
 	'mode': {name: "javascript", jsonld: true}
   });
+  
+//  $( "#uploadcsv" ).click(function() {
+  
+  //  var csvdata="1,2,3,4,a,b,c,d";
+  //  csveditor.setValue(csvdata);
+
+	//});
+  
+  // handle file input
+	$("#fileSelector").change(function() {
+    console.log(this.files)
+    var reader = new FileReader();  
+    reader.onload = function(e) {
+		var text = reader.result;
+		console.log(text);
+		
+	csvdata2="fdasiofhidsahfiod as2";
+    csveditor.setValue(reader.result);
+	}
+	var f=this.files[0];
+    reader.readAsText(f);
+
+	
+});
+  
+  
+  
   
   $( "#transformcsv" ).click(function() {
   
