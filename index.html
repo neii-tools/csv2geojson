@@ -1,0 +1,321 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>NEMSR - csv2json</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="inc/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link href="inc/bootstrap/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="inc/bootstrap/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+	
+	<link rel="stylesheet" href="inc/codemirror/lib/codemirror.css">
+	
+
+
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">NEMSR - CSV to JSON converter</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+			<li class="active"><a href="http://www.neii.gov.au/nemsr">About NEMSR</a></li>
+          </ul>
+		  
+		  
+		  
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+
+        <h1>NEMSR - CSV to JSON converter</h1>
+	
+	<div class="panel panel-primary">
+      <div class="panel-heading">Step 1 - Download the CSV template</div>
+      <div class="panel-body">Download the CSV <a href="template.csv">template and save it locally.</a></div>
+    </div><!-- /.panel1-->
+	
+	<div class="panel panel-primary">
+      <div class="panel-heading">Step 2 - Prepare your data</div>
+      <div class="panel-body">Populate the template with data about your monitoring sites. For more information about the NEMSR schema and vocabularies used in the template please see the <a href="http://www.neii.gov.au/nemsr/data-providers">NEMSR data provider area</a> of the NEII website.</div>
+    </div><!-- /.panel 2-->
+	
+	<div class="panel panel-primary">
+      <div class="panel-heading">Step 3 - Load your data</div>
+      <div class="panel-body">When you are ready copy and paste your data from the template into the box below (delete the dummy data first!)
+	  
+	<div class="row">
+        <div class="col-md-12">
+            <textarea id="csv" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >
+id,name,description,siteURL,siteLicence,srsName,point.longitude,point.latitude,point.ahd,operatingAuthority,operationAuthorityURL,siteStatus,ex1,ex2,ex3,ex4,ex5,observedProperty,procedure,observationMethod,dataAvailabilityStatus,samplingRegime,firstObservationDate,finalObservationDate,observedProperty,procedure,observationMethod,dataAvailabilityStatus,samplingRegime,firstObservationDate,finalObservationDate
+DAV ,Davies_Reef,"Sensor network infrastructure was installed at Davies Reef in the central Great Barrier Reef off Townsville, Australia. The infrastructure consists of a base station mounted on the existing reef communications tower and a number of buoys which carry the actual sensors.",http://data.aims.gov.au/metadataviewer/uuid/5862162e-1640-4d06-ba77-2b413fec64a2,open-Other,epsg:4326,147.634,-18.831,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,1/12/2009,,,,,,,,
+HI,Heron_Island,"Sensor network infrastructure was installed at Heron Island in the southern Great Barrier Reef off Gladstone, Australia. The infrastructure consists of a base station mounted on the existing communications tower, a number of network relay poles installed in the lagoon and a number of buoys which carry the actual sensors.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=aefce70d-0ca2-494a-a8f9-47499e2c7f6e,open-Other,epsg:4326,151.912,-23.4408,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,13/08/2007,,,,,,,,
+LIZ ,Lizard_Island,"Sensor network infrastructure was installed at Lizard Island in the northern Great Barrier Reef off Cooktown, Australia. The infrastructure consists of a base station mounted on the workshop of the Lizard Island Research Station (LIRS), two sensor poles that create the on-reef network and four sensor floats on which the sensors are attached.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=efc69c33-528f-4853-99aa-74d73e0daffa,open-Other,epsg:4326,145.4471,-14.6784,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,30/08/2010,,,,,,,,
+MYR ,Myrmidon_Reef,"Sensor network infrastructure was installed at Myrmidon Reef in the central Great Barrier Reef off Townsville, Australia. The infrastructure consists of a base station mounted on the existing reef communications tower and a single buoy which carries the actual sensors.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=a1677f88-d1a9-469f-ba68-fd52f42b0739,open-Other,epsg:4326,147.3803,-18.27214,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,3/05/2011,,,,,,,,
+OTI,One_Tree_Island,"Sensor network infrastructure was installed at One Tree Island in the southern Great Barrier Reef off Gladstone, Australia. The infrastructure consists of a base station mounted on the existing water tower and three sensor poles located in each of the major lagoon systems around the island. Each pole has a thermistor mounted at the base and then a thermistor string with five additional sensors that are located down the wall of the coral structure into the lagoon.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=ee22a601-97cf-4b91-ac85-36c0198f912c,open-Other,epsg:4326,152.0915,-23.507,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,13/08/2007,,,,,,,,
+OI,Orpheus_Island,"Sensor network infrastructure was installed at Orpheus Island in the central Great Barrier Reef just north of Townsville, Australia. The infrastructure consists of a base station located on an existing mast at the Orpheus Island Research Station run by James Cook University, two sensor-floats or buoys - one located in Pioneer Bay off the Research Station and one in Little Pioneer Bay and three Relay / Sensor Poles - two located on the reef flat on the north-west point of Orpheus Island and one located on the southern point of near-by Pelorus Island.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=13846fdf-515a-46e3-836a-3a09906de215,open-Other,epsg:4326,146.4893,-18.6137,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,1/09/2009,,,,,,,,
+RIB ,Rib_Reef,"Sensor network infrastructure was installed at Rib Reef in the central Great Barrier Reef off Townsville, Australia. The infrastructure consists of a single 1300 mm buoy located off the north (front) of the reef.",http://data.aims.gov.au/metadataviewer/faces/view.xhtml?uuid=f81fc09e-a5b9-48c1-8315-975fb6209c7b,open-Other,epsg:4326,146.872014,-18.469325,0,Australian Institute of Marine Science (AIMS),http://www.aims.gov.au/,active,,,,,,oceans-oceanTemperature,,inSituOceanBasedPlatforms,available-services,oneSecondToOneMinute,22/12/2011,,,,,,,,</textarea>
+        </div>
+    	</div>
+	  
+	  </div>
+	  
+    </div><!-- /.panel 3-->
+	<div class="panel panel-primary">
+      <div class="panel-heading">Step 4: Add network details</div>
+      <div class="panel-body">Add information about your monitoring network in the form below:	
+			
+		<form class="form-horizontal" role="form">
+		<div class="row">
+			<div class="col-md-6">	
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="data-provider">Provider:</label>
+					<div class="col-sm-10">
+						<select class="form-control" id="data-provider">
+							<option value=""></option>
+							<option value="BOM">BOM</option>
+							<option value="GA">GA</option>
+							<option value="CSIRO">CSIRO</option>
+							<option value="DoAWR">DoAWR</option>
+							<option value="AGWR">AGWR</option>
+							<option value="TERN">TERN</option>
+							<option value="IMOS">IMOS</option>
+							<option value="ALA">ALA</option>
+						</select>
+					  
+					</div>
+				  </div>				
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="network-id">Network ID:</label>
+					<div class="col-sm-10">
+				<input type="text" class="form-control" id="network-id" placeholder="Define a short ID for your network (e.g. shelfMoorings)" >
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="network-name">Name:</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="network-name" placeholder="Enter the network name" >
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="network-description">Description:</label>
+					<div class="col-sm-10">
+					  <textarea rows="6" class="form-control" id="network-description" placeholder="Describe the network"></textarea>
+.					  
+					  <!--<input type="text" style="height:190px" class="form-control" id="network-description" placeholder="Describe the network" >-->
+					</div>
+				  </div>
+				<div class="form-group">
+					<label class="control-label col-sm-2" for="network-URL">URL:</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="network-url" placeholder="Enter the network URL">
+					</div>
+				  </div>
+ <div class="form-group">
+					<label class="control-label col-sm-2" for="environmental-theme1">Theme(s):</label>
+					<div class="col-sm-10">
+					<select class="form-control" id="environmental-theme1">
+							<option value=""></option>
+							<option value="air">air</option>
+							<option value="biota">biota</option>
+							<option value="human">human</option>
+							<option value="land">land</option>
+							<option value="ocean">ocean</option>
+							<option value="water">water</option>
+							
+						</select>
+						<select class="form-control" id="environmental-theme2">
+							<option value=""></option>
+							<option value="air">air</option>
+							<option value="biota">biota</option>
+							<option value="human">human</option>
+							<option value="land">land</option>
+							<option value="ocean">ocean</option>
+							<option value="water">water</option>
+							
+						</select>
+							<select class="form-control" id="environmental-theme3">
+							<option value=""></option>
+							<option value="air">air</option>
+							<option value="biota">biota</option>
+							<option value="human">human</option>
+							<option value="land">land</option>
+							<option value="ocean">ocean</option>
+							<option value="water">water</option>
+							
+						</select>
+					</div>
+				  </div>				  
+			</div>
+			<div class="col-md-6">
+		
+			
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="contact-name">Contact:</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="contact-name" placeholder="Enter a contact name for the network">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="contact-phone"></label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="contact-phone" placeholder="Enter a contact phone number for the network">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="contact-phone"></label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="contact-address" placeholder="Enter a contact address for the network">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="contact-phone"></label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="contact-resource" placeholder="Enter a contact URL (e.g. Organisation website">
+					</div>
+				  </div>				  
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="extension-field1">Extension Field 1</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="extension-field1" placeholder="Enter a name for extension field 1 (optional)">
+					</div>
+				  </div>		
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="extension-field1">Extension Field 2</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="extension-field2" placeholder="Enter a name for extension field 2 (optional)">
+					</div>
+				  </div>	
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="extension-field1">Extension Field 3</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="extension-field3" placeholder="Enter a name for extension field 3 (optional)">
+					</div>
+				  </div>
+				  <div class="form-group">
+					<label class="control-label col-sm-2" for="extension-field1">Extension Field 4</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="extension-field4" placeholder="Enter a name for extension field 4 (optional)">
+					</div>
+				  </div>					  
+			
+			      <div class="form-group">
+					<label class="control-label col-sm-2" for="extension-field1">Extension Field 5</label>
+					<div class="col-sm-10">
+					  <input type="text" class="form-control" id="extension-field5" placeholder="Enter a name for extension field 5 (optional)">
+					</div>
+				  </div>	
+			</div>
+		
+		</div>
+	  	</form>
+		</div>
+    </div><!-- /.panel 4-->
+
+	
+	
+	<div class="panel panel-primary">
+      <div class="panel-heading">Step 5 - Transform your data</div>
+      <div class="panel-body">
+	  
+		<div class="row">
+
+			<div class="col-md-12">
+			Transform your data to the NEMSR JSON format 
+		
+			
+			
+			<div class="text-center"><button type="button" class="btn btn-lg btn-warning" id="transformcsv">Transform <span class="glyphicon glyphicon-play"></span></button>
+	</div>		
+		</div>
+			
+
+		</div>
+	  
+	  
+	  </div>
+    </div><!-- /.panel 5-->
+		
+	
+	<div class="panel panel-primary">
+      <div class="panel-heading">Step 6 - View results and save</div>
+      <div class="panel-body">When finished your transformed data will be shown below and may be saved as a json file.
+		<div class="row">
+			<div class="col-md-12">
+				<textarea id="json" class="code" cols="100" rows="30" placeholder="JSON will appear here"></textarea>
+				<div class=text-center>
+					<button type="button" class="btn btn-lg btn-success" id="savejson">Save <span class="glyphicon glyphicon-floppy-save"></span></button>
+					
+					
+					
+				</div>
+			</div>
+		</div>
+	  </div>
+    </div>			<!-- /.panel 6-->
+		
+		
+
+	
+
+
+    </div><!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="inc/bootstrap/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="inc/bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+	
+
+	
+	<script src="inc/codemirror/lib/codemirror-min.js"></script>
+	<script>
+
+	</script>
+	
+	<script src="js/transform.js"></script>
+	<script src="js/nemsr.js"></script>
+	
+  </body>
+</html>

@@ -1,0 +1,22 @@
+{  
+   "dataProviders":[  
+      "ALA",
+      "AGWR",
+      "BOM",
+      "CSIRO",
+      "DoAWR",
+      "GA",
+      "IMOS",
+      "MDBA",
+      "TERN"
+   ],
+   "themes":[  
+      "air",
+      "biota",
+      "human",
+      "land",
+      "ocean",
+      "water",
+      "other"
+   ]
+}

@@ -1,0 +1,12 @@
+body {
+  padding-top: 50px;
+}
+
+
+
+.ace-editor { 
+        position: absolute;
+        width: 90%;
+        height: 600px;
+
+    }
