@@ -104,6 +104,17 @@ function destroyClickedElement(event)
 
 
 
+function convertDate(csvstrdate)
+//converts a CSV date string of format DD/MM/YYYY to ISO formatted JSON Date Time
+{
+	console.log(csvstrdate);
+	var dateParts=csvstrdate.split("/");
+	console.log(dateParts);
+	var isoDate=new Date(dateParts[2],dateParts[1]-1,dateParts[0]);
+	var jsonDate=isoDate.toJSON();
+	console.log(jsonDate);
+	return jsonDate;
+}
 
 
 function getNetworkDetails()
@@ -249,10 +260,10 @@ switch(index) {
         obj.properties.observingCapabilities[0].samplingRegime = value;		
 		break;
     case 22:
-        obj.properties.observingCapabilities[0].firstObservationDate = value;		
+        obj.properties.observingCapabilities[0].firstObservationDate = convertDate(value);		
 		break;
     case 23:
-        obj.properties.observingCapabilities[0].finalObservationDate = value;				
+        obj.properties.observingCapabilities[0].finalObservationDate = convertDate(value);				
         break;	
     case 24:
 	{
@@ -291,12 +302,12 @@ switch(index) {
 	break;
 	case 29:
      		if (value != "")
-	{   obj.properties.observingCapabilities[1].firstObservationDate = value;		
+	{   obj.properties.observingCapabilities[1].firstObservationDate = convertDate(value);		
     }
 	break;
 	case 30:
      		if (value != "")
-	{   obj.properties.observingCapabilities[1].finalObservationDate = value;				
+	{   obj.properties.observingCapabilities[1].finalObservationDate = convertDate(value);				
 }     
 	 break;			
   case 31:
@@ -381,12 +392,12 @@ switch(index) {
 	break;
 	case 43:
      		if (value != "")
-	{   obj.properties.observingCapabilities[3].firstObservationDate = value;		
+	{   obj.properties.observingCapabilities[3].firstObservationDate = convertDate(value);		
     }
 	break;
 	case 44:
      		if (value != "")
-	{   obj.properties.observingCapabilities[3].finalObservationDate = value;				
+	{   obj.properties.observingCapabilities[3].finalObservationDate = convertDate(value);				
 }     
 	 break;			
   case 45:
