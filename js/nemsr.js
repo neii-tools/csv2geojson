@@ -1,11 +1,10 @@
  $(function() {
   //gets the vocab content and populates the approprate form controls.
   $.getJSON("vocabs.json",function(vocabsjson) {
-  console.log(vocabsjson);
   var providers = vocabsjson.dataProviders;
-  console.log(providers);
+  //console.log(providers);
   var themes = vocabsjson.themes;
-  console.log(themes);
+  //console.log(themes);
   $('#data-provider').empty();
   $('#data-provider').append($('<option></option>').val("").html(""));
   $.each(providers, function(i, p) {
@@ -29,13 +28,8 @@
   
   
   
-  var csv = document.getElementById('csv');
- // var csveditorOLD = CodeMirror.fromTextArea(csv, {
-//	'lineNumbers': true, 
-//	'mode': ' text/plain'
-//  });
-  
-  var csveditor = CodeMirror.fromTextArea(csvload, {
+  var csv = document.getElementById('csvload');
+  var csveditor = CodeMirror.fromTextArea(csv, {
 	'lineNumbers': true, 
 	'mode': ' text/plain'
   });
@@ -46,35 +40,22 @@
 	'mode': {name: "javascript", jsonld: true}
   });
   
-//  $( "#uploadcsv" ).click(function() {
-  
-  //  var csvdata="1,2,3,4,a,b,c,d";
-  //  csveditor.setValue(csvdata);
-
-	//});
   
   // handle file input
 	$("#fileSelector").change(function() {
-    console.log(this.files)
     var reader = new FileReader();  
     reader.onload = function(e) {
 		var text = reader.result;
-		console.log(text);
-		
-	csvdata2="fdasiofhidsahfiod as2";
     csveditor.setValue(reader.result);
 	}
 	var f=this.files[0];
     reader.readAsText(f);
-
-	
 });
   
+
   
   
-  
-  $( "#transformcsv" ).click(function() {
-  
+  $( "#transformcsv" ).click(function() {  
     var jsonObj = getNetworkDetails();
     var csvText = csveditor.getDoc().getValue();;
 	var json = csvToJson(jsonObj, csvText);
