@@ -105,14 +105,14 @@ function destroyClickedElement(event)
 
 
 function convertDate(csvstrdate)
-//converts a CSV date string of format DD/MM/YYYY to ISO formatted JSON Date Time
+//converts a CSV date string of format DD/MM/YYYY to ISO formatted JSON Date-Time, assuming UTC
 {
-	console.log(csvstrdate);
 	var dateParts=csvstrdate.split("/");
-	console.log(dateParts);
-	var isoDate=new Date(dateParts[2],dateParts[1]-1,dateParts[0]);
-	var jsonDate=isoDate.toJSON();
-	console.log(jsonDate);
+	var day = parseInt(dateParts[0]);
+    var month = (parseInt(dateParts[1])-1); //january needs to be month 0, not month 1
+    var year = parseInt(dateParts[2]);
+	var isoDate=new Date(Date.UTC(year,month,day)); //Create iso date. Also need to set timezone as UTC otherwise it is system dependent.
+	var jsonDate=isoDate.toJSON(); //get JSON version of the date
 	// If there is no date return an empty string in preference to null
 	if (jsonDate == null){
 		jsonDate="";
