@@ -113,6 +113,10 @@ function convertDate(csvstrdate)
 	var isoDate=new Date(dateParts[2],dateParts[1]-1,dateParts[0]);
 	var jsonDate=isoDate.toJSON();
 	console.log(jsonDate);
+	// If there is no date return an empty string in preference to null
+	if (jsonDate == null){
+		jsonDate="";
+	}
 	return jsonDate;
 }
 
@@ -193,7 +197,7 @@ switch(index) {
         obj.properties.name = value;
         break;
     case 2:
-        obj.properties.siteDescription = value;
+        obj.properties.siteDescription = value.substring(0,499); //have to truncate the description if > 500 characters long.
         break;
     case 3:
         obj.properties.siteURL = value;
@@ -347,12 +351,12 @@ switch(index) {
 	break;
 	case 36:
      		if (value != "")
-	{   obj.properties.observingCapabilities[2].firstObservationDate = value;		
+	{   obj.properties.observingCapabilities[2].firstObservationDate = convertDate(value);		
     }
 	break;
 	case 37:
      		if (value != "")
-	{   obj.properties.observingCapabilities[2].finalObservationDate = value;				
+	{   obj.properties.observingCapabilities[2].finalObservationDate = convertDate(value);				
 }     
 	 break;			
 	   case 38:
@@ -437,12 +441,12 @@ switch(index) {
 	break;
 	case 50:
      		if (value != "")
-	{   obj.properties.observingCapabilities[4].firstObservationDate = value;		
+	{   obj.properties.observingCapabilities[4].firstObservationDate = convertDate(value);		
     }
 	break;
 	case 51:
      		if (value != "")
-	{   obj.properties.observingCapabilities[4].finalObservationDate = value;				
+	{   obj.properties.observingCapabilities[4].finalObservationDate = convertDate(value);				
 }     
 	 break;				 
    case 52:
@@ -482,12 +486,12 @@ switch(index) {
 	break;
 	case 57:
      		if (value != "")
-	{   obj.properties.observingCapabilities[5].firstObservationDate = value;		
+	{   obj.properties.observingCapabilities[5].firstObservationDate = convertDate(value);		
     }
 	break;
 	case 58:
      		if (value != "")
-	{   obj.properties.observingCapabilities[5].finalObservationDate = value;				
+	{   obj.properties.observingCapabilities[5].finalObservationDate = convertDate(value);				
 }     
 	 break;	
   case 59:
@@ -527,12 +531,12 @@ switch(index) {
 	break;
 	case 64:
      		if (value != "")
-	{   obj.properties.observingCapabilities[6].firstObservationDate = value;		
+	{   obj.properties.observingCapabilities[6].firstObservationDate = convertDate(value);		
     }
 	break;
 	case 65:
      		if (value != "")
-	{   obj.properties.observingCapabilities[6].finalObservationDate = value;				
+	{   obj.properties.observingCapabilities[6].finalObservationDate = convertDate(value);				
 }     
 	 break;	
   case 66:
@@ -572,12 +576,12 @@ switch(index) {
 	break;
 	case 71:
      		if (value != "")
-	{   obj.properties.observingCapabilities[7].firstObservationDate = value;		
+	{   obj.properties.observingCapabilities[7].firstObservationDate = convertDate(value);	
     }
 	break;
 	case 72:
      		if (value != "")
-	{   obj.properties.observingCapabilities[7].finalObservationDate = value;				
+	{   obj.properties.observingCapabilities[7].finalObservationDate = convertDate(value);			
 }     
 	 break;	
  
