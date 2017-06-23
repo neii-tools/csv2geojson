@@ -114,7 +114,8 @@ function convertDate(csvstrdate)
 	var day = parseInt(dateParts[0]);
     var month = (parseInt(dateParts[1])-1); //january needs to be month 0, not month 1
     var year = parseInt(dateParts[2]);
-	jsonDate= dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0]+"T00:00:00Z";
+	//jsonDate= dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0]+"T00:00:00Z";  //validator does not accept time even though json schema expects it.
+	jsonDate= dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
 	}
 	return jsonDate;
 }
