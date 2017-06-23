@@ -109,7 +109,6 @@ function convertDate(csvstrdate)
 {
 	if (csvstrdate==""){
 		jsonDate="";
-		
 	} else {
 	var dateParts=csvstrdate.split("/");
 	var day = parseInt(dateParts[0]);
