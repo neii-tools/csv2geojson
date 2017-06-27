@@ -2,14 +2,15 @@
   //gets the vocab content and populates the approprate form controls.
   $.getJSON("vocabs.json",function(vocabsjson) {
   var providers = vocabsjson.dataProviders;
-  //console.log(providers);
   var themes = vocabsjson.themes;
-  //console.log(themes);
+  var networks = vocabsjson.networks;
+  //populate data provider list
   $('#data-provider').empty();
   $('#data-provider').append($('<option></option>').val("").html(""));
   $.each(providers, function(i, p) {
   $('#data-provider').append($('<option></option>').val(p).html(p));
- });
+	});
+  //populate themes (three boxes)
   $('#environmental-theme1').empty();
   $('#environmental-theme1').append($('<option></option>').val("").html(""));
   $('#environmental-theme2').empty();
@@ -20,6 +21,13 @@
   $('#environmental-theme1').append($('<option></option>').val(p).html(p));
   $('#environmental-theme2').append($('<option></option>').val(p).html(p));
   $('#environmental-theme3').append($('<option></option>').val(p).html(p));
+  });
+  //populate network ids
+ 
+  $('#network-id').empty();
+  $('#network-id').append($('<option></option>').val("").html(""));
+  $.each(networks, function(i, p) {
+  $('#network-id').append($('<option></option>').val(p[0]).html(p[1]));
  });
 });
 
