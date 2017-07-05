@@ -1,40 +1,66 @@
  $(function() {
   //gets the vocab content and populates the approprate form controls.
-  $.getJSON("vocabs.json",function(vocabsjson) {
-  var providers = vocabsjson.dataProviders;
-  var themes = vocabsjson.themes;
-  var networks = vocabsjson.networks;
-  //populate data provider list
-  $('#data-provider').empty();
-  $('#data-provider').append($('<option></option>').val("").html(""));
-  $.each(providers, function(i, p) {
-  $('#data-provider').append($('<option></option>').val(p).html(p));
-	});
-  //populate themes (three boxes)
-  $('#environmental-theme1').empty();
-  $('#environmental-theme1').append($('<option></option>').val("").html(""));
-  $('#environmental-theme2').empty();
-  $('#environmental-theme2').append($('<option></option>').val("").html(""));
-  $('#environmental-theme3').empty();
-  $('#environmental-theme3').append($('<option></option>').val("").html(""));
-  $.each(themes, function(i, p) {
-  $('#environmental-theme1').append($('<option></option>').val(p).html(p));
-  $('#environmental-theme2').append($('<option></option>').val(p).html(p));
-  $('#environmental-theme3').append($('<option></option>').val(p).html(p));
+  $.getJSON("vocabconfig.json",function(vocabsconfig) {
+  console.log('hello');
+  var vocabs=vocabsconfig.vocabs;
+  $.each(vocabs, function(i, v) {
+      var vocabname = vocabs[i][0];
+      var vocaburl = vocabs[i][1];
+      var vocabsOfInterest=['environmental-theme', 'data-provider', 'network-id'];
+      if (vocabsOfInterest.indexOf(vocabname) > -1){
+		//get json from sissvoc and parse
+          $.getJSON(vocaburl,function(vocabjson) {
+          var terms = vocabjson.result.items;
+          //parse the individual terms into tabledata one by one, storing their 'label' and 'definition' from SiSSVoc.
+          // note - if sissvoc use of labels etc. changes this code might need to change.
+          var vocabarray=[];
+          $.each(terms, function(i, term){
+                termLabel=term.prefLabel._value;
+                termDef=term.definition;
+				vocabarray.push([termLabel,termDef]);
+          });	      
+                
+          if (vocabname == 'environmental-theme') {
+              console.log(vocabarray);
+                //populate environmental themes (three boxes)
+                $('#environmental-theme1').empty();
+                $('#environmental-theme1').append($('<option></option>').val("").html(""));
+                $('#environmental-theme2').empty();
+                $('#environmental-theme2').append($('<option></option>').val("").html(""));
+                $('#environmental-theme3').empty();
+                $('#environmental-theme3').append($('<option></option>').val("").html(""));
+                $.each(vocabarray, function(i, p) {
+                    $('#environmental-theme1').append($('<option></option>').val(p[0]).html(p[0]));
+                    $('#environmental-theme2').append($('<option></option>').val(p[0]).html(p[0]));
+                    $('#environmental-theme3').append($('<option></option>').val(p[0]).html(p[0]));
+                    });
+          }
+          else if (vocabname == 'data-provider'){
+              //populate data provider list
+              console.log(vocabarray);
+              $('#data-provider').empty();
+              $('#data-provider').append($('<option></option>').val("").html(""));
+              $.each(vocabarray, function(i, p) {
+                $('#data-provider').append($('<option></option>').val(p[0]).html(p[0]));
+                });
+          }
+          else if (vocabname == 'network-id'){
+              console.log(vocabarray);
+              //populate network ids
+              $('#network-id').empty();
+              $('#network-id').append($('<option></option>').val("").html(""));
+              $.each(vocabarray, function(i, p) {
+                $('#network-id').append($('<option></option>').val(p[0]).html(p[1]));
+              });
+          };
+          		
+		    
+            
+		});
+      };
   });
-  //populate network ids
- 
-  $('#network-id').empty();
-  $('#network-id').append($('<option></option>').val("").html(""));
-  $.each(networks, function(i, p) {
-  $('#network-id').append($('<option></option>').val(p[0]).html(p[1]));
- });
 });
 
-
-  
-  
-  
   
   var csv = document.getElementById('csvload');
   var csveditor = CodeMirror.fromTextArea(csv, {

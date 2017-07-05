@@ -1,0 +1,9 @@
+{  
+   "vocabs":[
+    ["data-provider","https://vocabs.ands.org.au/repository/api/lda/neii/neii-data-provider/version-1/concept.json"],  
+    ["environmental-theme","https://vocabs.ands.org.au/repository/api/lda/neii/neii-environmental-theme/version-1/concept.json"],
+    ["network-id","https://vocabs.ands.org.au/repository/api/lda/neii/neii-network-id/version-1/concept.json"]
+    ]
+}
+      
+
