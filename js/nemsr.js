@@ -1,5 +1,11 @@
  $(function() {
-  //gets the vocab content and populates the approprate form controls.
+     console.log('nothing here');
+  
+  /*
+  //gets the vocab content and populates the approprate form controls
+  
+  
+  
   $.getJSON("vocabs.json",function(vocabsjson) {
   var providers = vocabsjson.dataProviders;
   var themes = vocabsjson.themes;
@@ -29,9 +35,10 @@
   $.each(networks, function(i, p) {
   $('#network-id').append($('<option></option>').val(p[0]).html(p[1]));
  });
+
 });
 
-
+*/
   
   
   
@@ -42,6 +49,14 @@
 	'mode': ' text/plain'
   });
   
+  var csvNW = document.getElementById('csvloadNW');
+  var csveditorNW = CodeMirror.fromTextArea(csvNW, {
+	'lineNumbers': true, 
+	'mode': ' text/plain'
+  });
+  
+  
+  
   var json = document.getElementById('json');
   var jsoneditor = CodeMirror.fromTextArea(json, {
 	'lineNumbers': true, 
@@ -49,7 +64,7 @@
   });
   
   
-  // handle file input
+  // handle file input - site csv
 	$("#fileSelector").change(function() {
     var reader = new FileReader();  
     reader.onload = function(e) {
@@ -61,6 +76,16 @@
 });
   
 
+  // handle file input - network csv
+	$("#fileSelectorNW").change(function() {
+    var reader = new FileReader();  
+    reader.onload = function(e) {
+		var text = reader.result;
+    csveditorNW.setValue(reader.result);
+	}
+	var f=this.files[0];
+    reader.readAsText(f);
+});
   
   
   $( "#transformcsv" ).click(function() {  
