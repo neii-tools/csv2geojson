@@ -90,7 +90,16 @@
   
   $( "#transformcsv" ).click(function() {  
     var jsonObj = getNetworkDetails();
-    var csvText = csveditor.getDoc().getValue();;
+    var csvText = csveditor.getDoc().getValue();
+    var csvTextNW = csveditorNW.getDoc().getValue();
+    var jsonNW=csvToJsonNW(jsonObj,csvTextNW);
+    console.log(csvTextNW);
+    console.log(jsonNW);
+    
+    //TO DO - pass jsonNW to csvToJson instead of jsonObj...
+    
+	//var json = csvToJson(jsonObj, csvText);
+    
 	var json = csvToJson(jsonObj, csvText);
 	jsoneditor.getDoc().setValue(json);
     var totalLines = jsoneditor.lineCount();  
@@ -158,6 +167,11 @@ function getNetworkDetails()
 {
 	var jsonObj = clone(nemsrJSONObject);
 	
+    /*TO DO: instead of getting values from form we need to get them from the network CSV file*/
+    
+    
+    /*
+    
 	jsonObj.properties.dateGenerated = new Date();
 	jsonObj.properties.dataProvider = $("#data-provider" ).val();
 	jsonObj.properties.network[0].id = $("#network-id" ).val();
@@ -180,7 +194,7 @@ function getNetworkDetails()
 	jsonObj.properties.network[0].extensionFieldName3 = $("#extension-field3" ).val();
 	jsonObj.properties.network[0].extensionFieldName4 = $("#extension-field4" ).val();
 	jsonObj.properties.network[0].extensionFieldName5 = $("#extension-field5" ).val();
-	
+	*/
 	return jsonObj;
 }
 
@@ -188,10 +202,83 @@ function clone (src) {
     return JSON.parse(JSON.stringify(src));
 }
 
+
+function csvToJsonNW(jsonObj, csvNW)
+//converts the network csv to JSON
+{
+	//var features = {"features": []};
+    console.log(csvNW);
+    var jsonNW=jsonObj;
+    var array = CSVToArray(csvNW);
+    var nwData=array[1];
+        
+	jsonNW.properties.dateGenerated = new Date();
+	jsonNW.properties.dataProvider = nwData[0];
+	jsonNW.properties.network[0].id = nwData[1];
+	jsonNW.properties.network[0].name = nwData[2];
+	jsonNW.properties.network[0].networkDescription = nwData[3];
+	jsonNW.properties.network[0].networkURL = nwData[4];
+	jsonNW.properties.network[0].contactDetails.name = nwData[7];
+	jsonNW.properties.network[0].contactDetails.phone = nwData[8];
+	jsonNW.properties.network[0].contactDetails.address = nwData[9];
+	jsonNW.properties.network[0].contactDetails.onlineResource = nwData[10];
+	jsonNW.properties.network[0].environmentalTheme.push(nwData[5]);
+    if (nwData[6] != "")
+		jsonObj.properties.network[0].environmentalTheme.push(nwData[6]);
+	//note only 2 environmental themes. Should there be 3 in the template?
+    
+	jsonNW.properties.network[0].extensionFieldName1 = nwData[11];
+	jsonNW.properties.network[0].extensionFieldName2 = nwData[12];
+	jsonNW.properties.network[0].extensionFieldName3 = nwData[13];
+	jsonNW.properties.network[0].extensionFieldName4 = nwData[14];
+	jsonNW.properties.network[0].extensionFieldName5 = nwData[15];
+    
+    
+    
+    
+    console.log(array);
+    /*
+
+    var objArray = [];
+    for (var i = 1; i < array.length; i++) {
+	
+	   var siteObj = clone(nemsrJSONSite);
+
+	   
+        objArray[i - 1] = {};
+        for (var k = 0; k < array[0].length && k < array[i].length; k++) {
+            var key = array[0][k];
+			siteObj = setSiteValue(k, siteObj,array[i][k]);
+
+        }
+
+		features.features.push(siteObj);
+				
+    }
+	
+
+	
+	jsonObj.features = features.features;
+    
+    */
+	
+    return jsonNW;
+    /*
+	var json = JSON.stringify(jsonObj);
+
+    var str = json.replace(/},/g, "},\r\n");
+	
+	return str;*/
+}
+
+
+
+
+
 function csvToJson(jsonObj, csv)
 {
 	var features = {"features": []};
-   var array = CSVToArray(csv);
+    var array = CSVToArray(csv);
     var objArray = [];
     for (var i = 1; i < array.length; i++) {
 	
