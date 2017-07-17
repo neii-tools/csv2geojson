@@ -1,48 +1,5 @@
  $(function() {
-     console.log('nothing here');
-  
-  /*
-  //gets the vocab content and populates the approprate form controls
-  
-  
-  
-  $.getJSON("vocabs.json",function(vocabsjson) {
-  var providers = vocabsjson.dataProviders;
-  var themes = vocabsjson.themes;
-  var networks = vocabsjson.networks;
-  //populate data provider list
-  $('#data-provider').empty();
-  $('#data-provider').append($('<option></option>').val("").html(""));
-  $.each(providers, function(i, p) {
-  $('#data-provider').append($('<option></option>').val(p).html(p));
-	});
-  //populate themes (three boxes)
-  $('#environmental-theme1').empty();
-  $('#environmental-theme1').append($('<option></option>').val("").html(""));
-  $('#environmental-theme2').empty();
-  $('#environmental-theme2').append($('<option></option>').val("").html(""));
-  $('#environmental-theme3').empty();
-  $('#environmental-theme3').append($('<option></option>').val("").html(""));
-  $.each(themes, function(i, p) {
-  $('#environmental-theme1').append($('<option></option>').val(p).html(p));
-  $('#environmental-theme2').append($('<option></option>').val(p).html(p));
-  $('#environmental-theme3').append($('<option></option>').val(p).html(p));
-  });
-  //populate network ids
- 
-  $('#network-id').empty();
-  $('#network-id').append($('<option></option>').val("").html(""));
-  $.each(networks, function(i, p) {
-  $('#network-id').append($('<option></option>').val(p[0]).html(p[1]));
- });
-
-});
-
-*/
-  
-  
-  
-  
+    
   var csv = document.getElementById('csvload');
   var csveditor = CodeMirror.fromTextArea(csv, {
 	'lineNumbers': true, 
@@ -89,18 +46,12 @@
   
   
   $( "#transformcsv" ).click(function() {  
-    var jsonObj = getNetworkDetails();
+    var jsonObj = clone(nemsrJSONObject);
     var csvText = csveditor.getDoc().getValue();
     var csvTextNW = csveditorNW.getDoc().getValue();
     var jsonNW=csvToJsonNW(jsonObj,csvTextNW);
-    console.log(csvTextNW);
-    console.log(jsonNW);
     
-    //TO DO - pass jsonNW to csvToJson instead of jsonObj...
-    
-	//var json = csvToJson(jsonObj, csvText);
-    
-	var json = csvToJson(jsonObj, csvText);
+	var json = csvToJson(jsonNW, csvText);
 	jsoneditor.getDoc().setValue(json);
     var totalLines = jsoneditor.lineCount();  
     jsoneditor.autoFormatRange({line:0, ch:0}, {line:totalLines});
@@ -162,6 +113,7 @@ function convertDate(csvstrdate)
 	return jsonDate;
 }
 
+/*
 
 function getNetworkDetails()
 {
@@ -195,8 +147,9 @@ function getNetworkDetails()
 	jsonObj.properties.network[0].extensionFieldName4 = $("#extension-field4" ).val();
 	jsonObj.properties.network[0].extensionFieldName5 = $("#extension-field5" ).val();
 	*/
-	return jsonObj;
+/*	return jsonObj;
 }
+*/
 
 function clone (src) {
     return JSON.parse(JSON.stringify(src));
@@ -206,8 +159,6 @@ function clone (src) {
 function csvToJsonNW(jsonObj, csvNW)
 //converts the network csv to JSON
 {
-	//var features = {"features": []};
-    console.log(csvNW);
     var jsonNW=jsonObj;
     var array = CSVToArray(csvNW);
     var nwData=array[1];
@@ -236,39 +187,8 @@ function csvToJsonNW(jsonObj, csvNW)
     
     
     
-    console.log(array);
-    /*
-
-    var objArray = [];
-    for (var i = 1; i < array.length; i++) {
-	
-	   var siteObj = clone(nemsrJSONSite);
-
-	   
-        objArray[i - 1] = {};
-        for (var k = 0; k < array[0].length && k < array[i].length; k++) {
-            var key = array[0][k];
-			siteObj = setSiteValue(k, siteObj,array[i][k]);
-
-        }
-
-		features.features.push(siteObj);
-				
-    }
-	
-
-	
-	jsonObj.features = features.features;
-    
-    */
-	
     return jsonNW;
-    /*
-	var json = JSON.stringify(jsonObj);
-
-    var str = json.replace(/},/g, "},\r\n");
-	
-	return str;*/
+    
 }
 
 

@@ -67,36 +67,19 @@
         <h1>NEMSR - CSV to JSON converter **PROTOTYPE**</h1>
 	
 	<div class="panel panel-primary">
-      <div class="panel-heading">Step 1 - Download the CSV template</div>
-      <div class="panel-body">Download the <a href="template.csv">CSV template</a> and save it locally. The template contains example data which should be replaced with your own data.</div>
+      <div class="panel-heading">Step 1 - Download the CSV templates for network and site data</div>
+      <div class="panel-body">Download the <a href="network-template.csv">CSV template for network data</a> and save it locally. Download the <a href="site-template.csv">CSV template for site data</a> and save it locally. The templates contain example data which should be replaced with your own data.</div>
     </div><!-- /.panel1-->
 	
 	<div class="panel panel-primary">
       <div class="panel-heading">Step 2 - Prepare your data</div>
-      <div class="panel-body">Populate the template with data about your monitoring sites. For more information about the NEMSR schema and vocabularies used in the template please see the <a href="http://www.neii.gov.au/nemsr/data-providers">NEMSR data provider area</a> of the NEII website.</div>
+      <div class="panel-body">Populate the two templates with data about your monitoring sites. For more information about the NEMSR schema and vocabularies used in the template please see the <a href="http://www.neii.gov.au/nemsr/data-providers">NEMSR data provider area</a> of the NEII website.</div>
     </div><!-- /.panel 2-->
 	
     
-	<div class="panel panel-primary">
-      <div class="panel-heading">Step 3 - Load your site data</div>
-      <div class="panel-body">When you are ready upload your CSV formatted site data.
-        <input id="fileSelector" type="file" style="visibility:hidden" accept=".csv"/>
-        <div class="text-center"><button type="button" class="btn btn-lg btn-danger"  onclick="$('#fileSelector').click();" id="uploadcsv">Upload CSV <span class="glyphicon glyphicon-cloud-upload"></span></button>
-	</div>
-	<div class="row">
-        <div class="col-md-12">
-            <textarea id="csvload" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >(Your uploaded CSV data will appear here...)</textarea>
-        </div>
-    	</div>
-	  
-	  </div>
-	  
-    </div><!-- /.panel 3-->
-    
-    
     
 	<div class="panel panel-primary">
-      <div class="panel-heading">Step 3b - Load your network data</div>
+      <div class="panel-heading">Step 3 - Upload your network data</div>
       <div class="panel-body">When you are ready upload your CSV formatted network data.
         <input id="fileSelectorNW" type="file" style="visibility:hidden" accept=".csv"/>
         <div class="text-center"><button type="button" class="btn btn-lg btn-danger"  onclick="$('#fileSelectorNW').click();" id="uploadcsvNW">Upload Network CSV <span class="glyphicon glyphicon-cloud-upload"></span></button>
@@ -109,165 +92,24 @@
 	  
 	  </div>
 	  
-    </div><!-- /.panel 3b-->
-    
-    
-	<!--
+    </div><!-- /.panel 3-->
     
 	<div class="panel panel-primary">
-      <div class="panel-heading">Step 4: Add network details</div>
-      <div class="panel-body">Add information about your monitoring network in the form below:	
-			
-		<form class="form-horizontal" role="form">
-		<div class="row">
-			<div class="col-md-6">	
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="data-provider">Provider:</label>
-					<div class="col-sm-10">
-						<select class="form-control" id="data-provider">
-							<option value=""></option>
-							<option value="BOM">BOM</option>
-							<option value="GA">GA</option>
-							<option value="CSIRO">CSIRO</option>
-							<option value="DoAWR">DoAWR</option>
-							<option value="AGWR">AGWR</option>
-							<option value="TERN">TERN</option>
-							<option value="IMOS">IMOS</option>
-							<option value="ALA">ALA</option>
-						</select>
-					  
-					</div>
-				  </div>				
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="network-id">Network ID:</label>
-					<div class="col-sm-10">
-						<select class="form-control" id="network-id">
-							<option value=""></option>
-							<option value="1">Dummy1</option>
-							<option value="2">Dummy2</option>
-						</select>
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="network-name">Name:</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="network-name" placeholder="Enter the network name" >
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="network-description">Description:</label>
-					<div class="col-sm-10">
-					  <textarea rows="6" class="form-control" id="network-description" placeholder="Describe the network (500 characters max)."></textarea>
-					</div>
-				  </div>
-				<div class="form-group">
-					<label class="control-label col-sm-2" for="network-URL">URL:</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="network-url" placeholder="Enter the network URL">
-					</div>
-				  </div>
- <div class="form-group">
-					<label class="control-label col-sm-2" for="environmental-theme1">Theme(s):</label>
-					<div class="col-sm-10">
-					<select class="form-control" id="environmental-theme1">
-							<option value=""></option>
-							<option value="air">air</option>
-							<option value="biota">biota</option>
-							<option value="human">human</option>
-							<option value="land">land</option>
-							<option value="ocean">ocean</option>
-							<option value="water">water</option>
-							
-						</select>
-						<select class="form-control" id="environmental-theme2">
-							<option value=""></option>
-							<option value="air">air</option>
-							<option value="biota">biota</option>
-							<option value="human">human</option>
-							<option value="land">land</option>
-							<option value="ocean">ocean</option>
-							<option value="water">water</option>
-							
-						</select>
-							<select class="form-control" id="environmental-theme3">
-							<option value=""></option>
-							<option value="air">air</option>
-							<option value="biota">biota</option>
-							<option value="human">human</option>
-							<option value="land">land</option>
-							<option value="ocean">ocean</option>
-							<option value="water">water</option>
-							
-						</select>
-					</div>
-				  </div>				  
-			</div>
-			<div class="col-md-6">
-		
-			
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="contact-name">Contact:</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="contact-name" placeholder="Enter a contact name for the network">
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="contact-phone"></label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="contact-phone" placeholder="Enter a contact phone number for the network">
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="contact-phone"></label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="contact-address" placeholder="Enter a contact address for the network">
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="contact-phone"></label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="contact-resource" placeholder="Enter a contact URL (e.g. Organisation website">
-					</div>
-				  </div>				  
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="extension-field1">Extension Field 1</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="extension-field1" placeholder="Enter a name for extension field 1 (optional)">
-					</div>
-				  </div>		
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="extension-field1">Extension Field 2</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="extension-field2" placeholder="Enter a name for extension field 2 (optional)">
-					</div>
-				  </div>	
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="extension-field1">Extension Field 3</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="extension-field3" placeholder="Enter a name for extension field 3 (optional)">
-					</div>
-				  </div>
-				  <div class="form-group">
-					<label class="control-label col-sm-2" for="extension-field1">Extension Field 4</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="extension-field4" placeholder="Enter a name for extension field 4 (optional)">
-					</div>
-				  </div>					  
-			
-			      <div class="form-group">
-					<label class="control-label col-sm-2" for="extension-field1">Extension Field 5</label>
-					<div class="col-sm-10">
-					  <input type="text" class="form-control" id="extension-field5" placeholder="Enter a name for extension field 5 (optional)">
-					</div>
-				  </div>	
-			</div>
-		
-		</div>
-	  	</form>
-		</div>
+      <div class="panel-heading">Step 4 - Upload your site data</div>
+      <div class="panel-body">When you are ready upload your CSV formatted site data.
+        <input id="fileSelector" type="file" style="visibility:hidden" accept=".csv"/>
+        <div class="text-center"><button type="button" class="btn btn-lg btn-danger"  onclick="$('#fileSelector').click();" id="uploadcsv">Upload Site CSV <span class="glyphicon glyphicon-cloud-upload"></span></button>
+	</div>
+	<div class="row">
+        <div class="col-md-12">
+            <textarea id="csvload" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >(Your uploaded CSV data will appear here...)</textarea>
+        </div>
+    	</div>
+	  
+	  </div>
+	  
     </div><!-- /.panel 4-->
-
-	-->
+    
 	
 	<div class="panel panel-primary">
       <div class="panel-heading">Step 5 - Transform your data</div>
@@ -276,7 +118,7 @@
 		<div class="row">
 
 			<div class="col-md-12">
-			Transform your data to the NEMSR JSON format 
+			Transform your data to the NEMSR JSON format. This will take the data you have uploaded and output NEII GeoJSON.
 		
 			
 			
@@ -310,9 +152,6 @@
     </div>			<!-- /.panel 6-->
 		
 		
-
-	
-
 
     </div><!-- /.container -->
 
