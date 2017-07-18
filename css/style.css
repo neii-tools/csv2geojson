@@ -11,7 +11,7 @@ body {
 h1 {
 	font-family: 'Dosis', sans-serif;
 	font-weight: 300;
-	font-size: 3.5em;
+	font-size: 2.4em;
     color:white;
     margin-top:70px;
     margin-bottom:50px;
@@ -19,7 +19,7 @@ h1 {
 h2 {
 	font-family: 'Dosis', sans-serif;
 	font-weight: 300;
-	font-size: 2.45em;
+	font-size: 2em;
 }
 
 h3{
@@ -35,7 +35,7 @@ h4{
 
 .navbar {
     font-family: 'Dosis', sans-serif;
-	font-size: 1.75em;
+	font-size: 1em;
     font-weight:600;
     
 }
@@ -49,7 +49,7 @@ h4{
 
 .panel-heading {
     font-family: 'Dosis', sans-serif;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight:500;
 }
 
