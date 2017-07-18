@@ -1,46 +1,18 @@
  $(function() {
-  //gets the vocab content and populates the approprate form controls.
-  $.getJSON("vocabs.json",function(vocabsjson) {
-  var providers = vocabsjson.dataProviders;
-  var themes = vocabsjson.themes;
-  var networks = vocabsjson.networks;
-  //populate data provider list
-  $('#data-provider').empty();
-  $('#data-provider').append($('<option></option>').val("").html(""));
-  $.each(providers, function(i, p) {
-  $('#data-provider').append($('<option></option>').val(p).html(p));
-	});
-  //populate themes (three boxes)
-  $('#environmental-theme1').empty();
-  $('#environmental-theme1').append($('<option></option>').val("").html(""));
-  $('#environmental-theme2').empty();
-  $('#environmental-theme2').append($('<option></option>').val("").html(""));
-  $('#environmental-theme3').empty();
-  $('#environmental-theme3').append($('<option></option>').val("").html(""));
-  $.each(themes, function(i, p) {
-  $('#environmental-theme1').append($('<option></option>').val(p).html(p));
-  $('#environmental-theme2').append($('<option></option>').val(p).html(p));
-  $('#environmental-theme3').append($('<option></option>').val(p).html(p));
-  });
-  //populate network ids
- 
-  $('#network-id').empty();
-  $('#network-id').append($('<option></option>').val("").html(""));
-  $.each(networks, function(i, p) {
-  $('#network-id').append($('<option></option>').val(p[0]).html(p[1]));
- });
-});
-
-
-  
-  
-  
-  
+    
   var csv = document.getElementById('csvload');
   var csveditor = CodeMirror.fromTextArea(csv, {
 	'lineNumbers': true, 
 	'mode': ' text/plain'
   });
+  
+  var csvNW = document.getElementById('csvloadNW');
+  var csveditorNW = CodeMirror.fromTextArea(csvNW, {
+	'lineNumbers': true, 
+	'mode': ' text/plain'
+  });
+  
+  
   
   var json = document.getElementById('json');
   var jsoneditor = CodeMirror.fromTextArea(json, {
@@ -49,7 +21,7 @@
   });
   
   
-  // handle file input
+  // handle file input - site csv
 	$("#fileSelector").change(function() {
     var reader = new FileReader();  
     reader.onload = function(e) {
@@ -61,13 +33,26 @@
 });
   
 
+  // handle file input - network csv
+	$("#fileSelectorNW").change(function() {
+    var reader = new FileReader();  
+    reader.onload = function(e) {
+		var text = reader.result;
+    csveditorNW.setValue(reader.result);
+	}
+	var f=this.files[0];
+    reader.readAsText(f);
+});
   
   
   $( "#transformcsv" ).click(function() {  
-    var jsonObj = getNetworkDetails();
-    var csvText = csveditor.getDoc().getValue();;
-	var json = csvToJson(jsonObj, csvText);
-	jsoneditor.getDoc().setValue(json);
+    var jsonObj = clone(nemsrJSONObject); // get a blank json nemsr network object
+    var csvText = csveditor.getDoc().getValue(); // get the site csv data from the site box in the gui
+    var csvTextNW = csveditorNW.getDoc().getValue(); // get the network csv data from the network box in the gui
+    var jsonNW=csvToJsonNW(jsonObj,csvTextNW); //add the network csv data to the json object
+    
+	var json = csvToJson(jsonNW, csvText); // add the site csv data to the json object
+	jsoneditor.getDoc().setValue(json); // publish the resulting json to the json box in the gui and tweak formatting
     var totalLines = jsoneditor.lineCount();  
     jsoneditor.autoFormatRange({line:0, ch:0}, {line:totalLines});
 
@@ -113,60 +98,94 @@ function destroyClickedElement(event)
 
 
 function convertDate(csvstrdate)
-//converts a CSV date string of format DD/MM/YYYY to ISO formatted JSON Date-Time, assuming UTC
+//converts a CSV date string of one of DD-MM-YYYY, YYYY-MM-DD, DD/MM/YYYY or YYYY/MM/DD to ISO formatted JSON Date-Time, assuming UTC
+
 {
-	if (csvstrdate==""){
+    var inputdate=csvstrdate;
+	if (inputdate==""){
 		jsonDate="";
 	} else {
-	var dateParts=csvstrdate.split("/");
-	var day = parseInt(dateParts[0]);
-    var month = (parseInt(dateParts[1])-1); //january needs to be month 0, not month 1
-    var year = parseInt(dateParts[2]);
-	//jsonDate= dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0]+"T00:00:00Z";  //validator does not accept time even though json schema expects it.
-	jsonDate= dateParts[2]+"-"+dateParts[1]+"-"+dateParts[0];
+      //Check which seperator is used for the date '/' or '-'  
+        var date1 = inputdate.split('/');  
+        var date2 = inputdate.split('-');
+        var dateParts = ""; // if date isn't valid then a nil date string will be returned.
+        if (date1.length>1)  
+            {  
+            dateParts=date1;  
+            }  
+        else if (date2.length>1)  
+            {  
+            dateParts = date2;  
+            } 
+        
+        //work out if it is in year, month, day or day, month, year order and parse accordingly.
+        if (parseInt(dateParts[2]) > parseInt(dateParts[0])){
+        //order is year last
+        var day = dateParts[0];
+        var month = dateParts[1]; 
+        var year = dateParts[2];
+        } else {
+        // assume order is year first (this code does not handle US-style month first..)
+        var day = dateParts[2];
+        var month = dateParts[1]; 
+        var year = dateParts[0];
+        }
+        
+        //jsonDate= year+"-"+month+"-"+day+"T00:00:00Z";  //This is the proper JSON date-time format but validator does not accept time even though json schema expects it.
+        jsonDate= year+"-"+month+"-"+day; // so use this truncated version... 
 	}
 	return jsonDate;
 }
 
 
-function getNetworkDetails()
-{
-	var jsonObj = clone(nemsrJSONObject);
-	
-	jsonObj.properties.dateGenerated = new Date();
-	jsonObj.properties.dataProvider = $("#data-provider" ).val();
-	jsonObj.properties.network[0].id = $("#network-id" ).val();
-	jsonObj.properties.network[0].name = $("#network-name" ).val();
-	jsonObj.properties.network[0].networkDescription = $("#network-description" ).val();
-	jsonObj.properties.network[0].networkURL = $("#network-url" ).val();
-	jsonObj.properties.network[0].contactDetails.name = $("#contact-name" ).val();
-	jsonObj.properties.network[0].contactDetails.phone = $("#contact-phone" ).val();
-	jsonObj.properties.network[0].contactDetails.address = $("#contact-address" ).val();
-	jsonObj.properties.network[0].contactDetails.onlineResource = $("#contact-resource" ).val();
-	jsonObj.properties.network[0].environmentalTheme.push($("#environmental-theme1" ).val());
-	if ($("#environmental-theme2" ).val() != "")
-		jsonObj.properties.network[0].environmentalTheme.push($("#environmental-theme2" ).val());
-		
-	if ($("#environmental-theme3" ).val() != "")
-		jsonObj.properties.network[0].environmentalTheme.push($("#environmental-theme3" ).val());		
-	
-	jsonObj.properties.network[0].extensionFieldName1 = $("#extension-field1" ).val();
-	jsonObj.properties.network[0].extensionFieldName2 = $("#extension-field2" ).val();
-	jsonObj.properties.network[0].extensionFieldName3 = $("#extension-field3" ).val();
-	jsonObj.properties.network[0].extensionFieldName4 = $("#extension-field4" ).val();
-	jsonObj.properties.network[0].extensionFieldName5 = $("#extension-field5" ).val();
-	
-	return jsonObj;
-}
-
 function clone (src) {
     return JSON.parse(JSON.stringify(src));
 }
 
+
+function csvToJsonNW(jsonObj, csvNW)
+//converts the network csv to JSON
+{
+    var jsonNW=jsonObj;
+    var array = CSVToArray(csvNW);
+    var nwData=array[1];
+        
+	jsonNW.properties.dateGenerated = new Date();
+	jsonNW.properties.dataProvider = nwData[0];
+	jsonNW.properties.network[0].id = nwData[1];
+	jsonNW.properties.network[0].name = nwData[2];
+	jsonNW.properties.network[0].networkDescription = nwData[3];
+	jsonNW.properties.network[0].networkURL = nwData[4];
+	jsonNW.properties.network[0].contactDetails.name = nwData[7];
+	jsonNW.properties.network[0].contactDetails.phone = nwData[8];
+	jsonNW.properties.network[0].contactDetails.address = nwData[9];
+	jsonNW.properties.network[0].contactDetails.onlineResource = nwData[10];
+	jsonNW.properties.network[0].environmentalTheme.push(nwData[5]);
+    if (nwData[6] != "")
+		jsonObj.properties.network[0].environmentalTheme.push(nwData[6]);
+	//note only 2 environmental themes. Should there be 3 in the template?
+    
+	jsonNW.properties.network[0].extensionFieldName1 = nwData[11];
+	jsonNW.properties.network[0].extensionFieldName2 = nwData[12];
+	jsonNW.properties.network[0].extensionFieldName3 = nwData[13];
+	jsonNW.properties.network[0].extensionFieldName4 = nwData[14];
+	jsonNW.properties.network[0].extensionFieldName5 = nwData[15];
+    
+    
+    
+    
+    return jsonNW;
+    
+}
+
+
+
+
+
 function csvToJson(jsonObj, csv)
 {
 	var features = {"features": []};
-   var array = CSVToArray(csv);
+    var array = CSVToArray(csv);
     var objArray = [];
     for (var i = 1; i < array.length; i++) {
 	
