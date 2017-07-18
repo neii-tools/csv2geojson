@@ -198,8 +198,11 @@ function csvToJson(jsonObj, csv)
 			siteObj = setSiteValue(k, siteObj,array[i][k]);
 
         }
-
-		features.features.push(siteObj);
+        if (siteObj.id){
+        //push if siteObj has id. If it doesn't it is probably a blank line in the input csv    
+        features.features.push(siteObj);
+        } 
+		
 				
     }
 	
