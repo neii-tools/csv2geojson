@@ -39,7 +39,7 @@
 
   <body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -48,12 +48,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">NEMSR - CSV to JSON converter **PROTOTYPE**</a>
+          <a class="navbar-brand" href="#">NEMSR - CSV to GeoJSON converter</a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
-			<li class="active"><a href="http://www.neii.gov.au/nemsr">About NEMSR</a></li>
+            <li class="active"><a href="#">HOME</a></li>
+			<li><a href="http://www.neii.gov.au/nemsr">NEMSR</a></li>
           </ul>
 		  
 		  
@@ -64,21 +64,21 @@
 
     <div class="container">
 
-        <h1>NEMSR - CSV to JSON converter **PROTOTYPE**</h1>
+        <h1>NEMSR - CSV to GeoJSON converter (Prototype)</h1>
 	
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
       <div class="panel-heading">Step 1 - Download the CSV templates for network and site data</div>
       <div class="panel-body">Download the <a href="network-template.csv">CSV template for network data</a> and save it locally. Download the <a href="site-template.csv">CSV template for site data</a> and save it locally. The templates contain example data which should be replaced with your own data.</div>
     </div><!-- /.panel1-->
 	
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
       <div class="panel-heading">Step 2 - Prepare your data</div>
-      <div class="panel-body">Populate the two templates with data about your monitoring sites. For more information about the NEMSR schema and vocabularies used in the template please see the <a href="http://www.neii.gov.au/nemsr/data-providers">NEMSR data provider area</a> of the NEII website.</div>
+      <div class="panel-body">Populate the two templates with data about your network and your monitoring sites. For more information about the NEMSR schema and vocabularies used in the template please see the <a href="http://www.neii.gov.au/nemsr/data-providers">NEMSR data provider area</a> of the NEII website.</div>
     </div><!-- /.panel 2-->
 	
     
     
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
       <div class="panel-heading">Step 3 - Upload your network data</div>
       <div class="panel-body">When you are ready upload your CSV formatted network data.
         <input id="fileSelectorNW" type="file" style="visibility:hidden" accept=".csv"/>
@@ -86,7 +86,7 @@
 	</div>
 	<div class="row">
         <div class="col-md-12">
-            <textarea id="csvloadNW" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >(Your uploaded CSV data will appear here...)</textarea>
+            <textarea id="csvloadNW" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >(Your uploaded network data will appear here...)</textarea>
         </div>
     	</div>
 	  
@@ -94,7 +94,7 @@
 	  
     </div><!-- /.panel 3-->
     
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
       <div class="panel-heading">Step 4 - Upload your site data</div>
       <div class="panel-body">When you are ready upload your CSV formatted site data.
         <input id="fileSelector" type="file" style="visibility:hidden" accept=".csv"/>
@@ -102,7 +102,7 @@
 	</div>
 	<div class="row">
         <div class="col-md-12">
-            <textarea id="csvload" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >(Your uploaded CSV data will appear here...)</textarea>
+            <textarea id="csvload" class="code" placeholder="Enter or paste your csv content here" cols="100" rows="30" >(Your uploaded site data will appear here...)</textarea>
         </div>
     	</div>
 	  
@@ -111,7 +111,7 @@
     </div><!-- /.panel 4-->
     
 	
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
       <div class="panel-heading">Step 5 - Transform your data</div>
       <div class="panel-body">
 	  
@@ -134,7 +134,7 @@
     </div><!-- /.panel 5-->
 		
 	
-	<div class="panel panel-primary">
+	<div class="panel panel-default">
       <div class="panel-heading">Step 6 - View results and save</div>
       <div class="panel-body">When finished your transformed data will be shown below and may be saved as a json file.
 		<div class="row">
