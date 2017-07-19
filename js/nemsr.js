@@ -160,9 +160,9 @@ function csvToJsonNW(jsonObj, csvNW)
 	jsonNW.properties.network[0].contactDetails.phone = nwData[8];
 	jsonNW.properties.network[0].contactDetails.address = nwData[9];
 	jsonNW.properties.network[0].contactDetails.onlineResource = nwData[10];
-	jsonNW.properties.network[0].environmentalTheme.push(nwData[5]);
+	jsonNW.properties.network[0].environmentalTheme.push(nwData[5].toLowerCase());
     if (nwData[6] != "")
-		jsonObj.properties.network[0].environmentalTheme.push(nwData[6]);
+		jsonObj.properties.network[0].environmentalTheme.push(nwData[6].toLowerCase());
 	//note only 2 environmental themes. Should there be 3 in the template?
     
 	jsonNW.properties.network[0].extensionFieldName1 = nwData[11];
