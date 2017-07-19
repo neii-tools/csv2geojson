@@ -1,11 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800);
 
 body {
-  padding-top: 50px;
-  background-image: url("../images/bg_2_col.jpg");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
+	background: #4d4d4d url('../images/bg_page.jpg') right top no-repeat !important;
+	background-position: 0px 0px;
+    background-size: contain;
 }
+
+
 
 
 h1 {
@@ -35,10 +36,13 @@ h4{
 
 .navbar {
     font-family: 'Dosis', sans-serif;
-	font-size: 1em;
+	font-size: 1.2em;
     font-weight:600;
-    
+    max-width:960px;
+    margin-left:auto;
+    margin-right:auto;
 }
+
 
 .navbar-default .navbar-nav > li > a {
    color: #632D1A; 
@@ -46,6 +50,14 @@ h4{
 .navbar-default .navbar-brand {
     color: #632D1A
 }
+
+
+.container {
+    max-width:960px;
+    padding-left:0px;
+    padding-right:0px;
+}
+
 
 .panel-heading {
     font-family: 'Dosis', sans-serif;
@@ -78,8 +90,5 @@ h4{
        margin-top: -25px 0 0 0;
     }
 
-/* sets the max width */
-.container {
-    max-width:800px
-}
+
 
