@@ -33,6 +33,7 @@
       [12, "HFradars"],
       [13, "faimms"],
       [14, "rainfallRadars"],
-      [15, "macroinvertebrates"]
+      [15, "macroinvertebrates"],
+      [16, "phytoplankton"]
    ]
 }
