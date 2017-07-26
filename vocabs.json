@@ -1,10 +1,9 @@
 {  
    "dataProviders":[  
       "ALA",
-      "AGWR",
       "BOM",
       "CSIRO",
-      "DoAWR",
+      "DOAWR",
       "GA",
       "IMOS",
       "MDBA",
@@ -23,14 +22,18 @@
       [1,"seismic"],
       [2, "acousticPressure"],
       [3, "geomag"],
-      [4, "solarRadiation"],
-      [5, "wdo"],
-      [6, "groundcover"],
-      [7, "ozflux"],
-      [8, "supersites"],
-      [9, "soil"],
-      [10, "shelfMoorings"],
-      [11, "hfRadarSites"],
-      [12, "faimms"]
+      [4, "ACORN-SAT"],
+      [5, "solarradiation"],
+      [6, "WDO"],
+      [7, "groundcover"],
+      [8, "OzFlux"],
+      [9, "supersites"],
+      [10, "deepWaterMoorings"],
+      [11, "shelfMoorings"],
+      [12, "HFradars"],
+      [13, "faimms"],
+      [14, "rainfallradars"],
+      [15, "macroinvertebrates"],
+      [16, "phytoplankton"]
    ]
 }
